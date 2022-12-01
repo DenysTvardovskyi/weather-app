@@ -9,7 +9,6 @@
       "hooks/*": ["application/hooks/*"],
       "router/*": ["routes/*"],
       "assets/*": ["assets/*"],
-      "theme": ["theme/*"]
     },
     "target": "ESNext",
     "useDefineForClassFields": true,
