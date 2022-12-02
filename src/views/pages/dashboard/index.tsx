@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import { addCity } from 'actions/addCity';
+import { addCity, deleteCity } from 'actions/addCity';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +11,9 @@ const Dashboard = () => {
     <Box>
       <ul>
         {cityList.map((i: string, index: number) => (
-          <li key={index}>{i}</li>
+          <li key={index} onClick={() => dispatch(deleteCity(i))}>
+            {i}
+          </li>
         ))}
       </ul>
       <TextField
