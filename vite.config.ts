@@ -14,6 +14,7 @@ export default defineConfig({
       router: path.resolve(__dirname, './src/routes'),
       assets: path.resolve(__dirname, './src/assets'),
       constants: path.resolve(__dirname, './src/constants'),
+      slices: path.resolve(__dirname, './src/redux/slices'),
     },
   },
 });

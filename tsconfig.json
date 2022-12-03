@@ -9,7 +9,8 @@
       "hooks/*": ["application/hooks/*"],
       "router/*": ["routes/*"],
       "assets/*": ["assets/*"],
-      "constants/*": ["constants/*"]
+      "constants/*": ["constants/*"],
+      "slices/*": ["redux/slices/*"],
     },
     "target": "ESNext",
     "useDefineForClassFields": true,
