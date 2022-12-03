@@ -2,7 +2,7 @@ import { IOption } from './i-option';
 
 export interface IAppState {
   search: ISearch;
-  city: [];
+  city: ICity;
 }
 
 export interface ISearch {
@@ -14,6 +14,7 @@ export interface ISearch {
 
 export interface ICity {
   cityList: IOption[];
+  cityWeather: any[];
   status: Status;
 }
 
