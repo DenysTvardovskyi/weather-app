@@ -8,7 +8,9 @@ const WEATHER_API_KEY = 'a8efff59c2b5c3436b8724b3620fe537';
 
 const initialState: ICity = {
   cityList: [],
+  city: null,
   cityWeather: [],
+  coordinates: null,
   status: 'idle',
 };
 
@@ -18,9 +20,9 @@ export const fetchWeather = createAsyncThunk(
     try {
       const response = await axios.get(
         WEATHER_URL +
-          `forecast?lat=${coordinates[0]}&lon=${coordinates[1]}&appid=${WEATHER_API_KEY}`,
+          `forecast?lon=${coordinates[0]}&lat=${coordinates[1]}&appid=${WEATHER_API_KEY}`,
       );
-      return [response.data];
+      return response.data;
     } catch (err: any) {
       return err.message;
     }
@@ -33,6 +35,9 @@ export const citySlice = createSlice({
   reducers: {
     addCity: (state, action: PayloadAction<IOption | null>) => {
       action.payload ? state.cityList.push(action.payload) : null;
+    },
+    setCoordinates: (state, action) => {
+      state.coordinates = action.payload;
     },
     removeCity: (state, action) => {
       state.cityList = state.cityList.filter(
@@ -47,7 +52,8 @@ export const citySlice = createSlice({
       })
       .addCase(fetchWeather.fulfilled, (state, action) => {
         state.status = 'success';
-        state.cityWeather = [...action.payload];
+        state.city = action.payload.city;
+        state.cityWeather = [...action.payload.list];
       })
       .addCase(fetchWeather.rejected, (state) => {
         state.status = 'failed';
@@ -55,6 +61,6 @@ export const citySlice = createSlice({
   },
 });
 
-export const { addCity, removeCity } = citySlice.actions;
+export const { addCity, removeCity, setCoordinates } = citySlice.actions;
 
 export default citySlice.reducer;

@@ -1,4 +1,4 @@
-import { IOption } from './i-option';
+import { Coordinate, IOption } from './i-option';
 
 export interface IAppState {
   search: ISearch;
@@ -15,13 +15,16 @@ export interface ISearch {
 export interface ICity {
   cityList: IOption[];
   cityWeather: any[];
+  city: any;
+  coordinates: Coordinate | null;
   status: Status;
 }
 
 export type Status = 'idle' | 'loading' | 'success' | 'failed';
 
 export interface IError {
-  message: string;
+  message?: string;
+  statusText?: string;
 }
 
 export interface IGeoCoding {

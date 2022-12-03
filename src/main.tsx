@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import { router } from 'router/public-routes';
 import store from './redux/store';
-
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

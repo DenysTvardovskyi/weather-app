@@ -1,21 +1,23 @@
 import { Box } from '@mui/material';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import SearchBar from 'components/search-bar';
 import { IOption } from 'application/intefaces/i-option';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const { cityList } = useSelector((state: any) => state.city);
-  const dispatch = useDispatch();
-  const [cityName, setCityName] = useState('');
   return (
     <Box>
       <SearchBar />
       <Box>
         {cityList.map((city: IOption, index: number) => (
-          <div key={index}>
-            {city.label} - {city.value.join(', ')}
-          </div>
+          <Link
+            key={index}
+            to={`weather?lat=${city.value[1]}&lon=${city.value[0]}`}
+          >
+            {' '}
+            {city.label} - [ {city.value.join(', ')} ]
+          </Link>
         ))}
       </Box>
     </Box>

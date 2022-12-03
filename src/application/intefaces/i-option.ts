@@ -6,4 +6,4 @@ export interface IOption {
 type lat = number;
 type lon = number;
 
-export type Coordinate = [lat, lon];
+export type Coordinate = [lon, lat];

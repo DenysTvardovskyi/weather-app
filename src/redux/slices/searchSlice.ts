@@ -23,7 +23,7 @@ export const fetchOptions = createAsyncThunk(
       const result = response.data.features.map((item: IFeature) => {
         return {
           label: item?.matching_place_name ?? item?.place_name,
-          value: item?.geometry?.coordinates,
+          value: item?.center,
         };
       });
       return [...result];
