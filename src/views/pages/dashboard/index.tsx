@@ -1,17 +1,18 @@
 import { Box, Button, TextField } from '@mui/material';
-import { addCity, deleteCity } from 'actions/addCity';
 import { useState } from 'react';
+import { removeCity, addCity } from '../../../redux/slices/citySlice';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchBar from 'components/search-bar';
 
 const Dashboard = () => {
-  const { cityList } = useSelector((state: any) => state.common);
+  const { cityList } = useSelector((state: any) => state.city);
   const dispatch = useDispatch();
   const [cityName, setCityName] = useState('');
   return (
     <Box>
       <ul>
         {cityList.map((i: string, index: number) => (
-          <li key={index} onClick={() => dispatch(deleteCity(i))}>
+          <li key={index} onClick={() => dispatch(removeCity(i))}>
             {i}
           </li>
         ))}
@@ -21,6 +22,9 @@ const Dashboard = () => {
         value={cityName}
         onChange={(e) => setCityName(e.target.value)}
       />
+
+      <SearchBar />
+
       <Button
         variant='contained'
         onClick={() => {
