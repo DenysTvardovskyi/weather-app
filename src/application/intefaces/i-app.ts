@@ -17,6 +17,7 @@ export interface ICity {
   cityWeather: any[];
   city: any;
   coordinates: Coordinate | null;
+  weatherByDay: any[];
   status: Status;
 }
 

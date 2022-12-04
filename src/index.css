@@ -36,3 +36,7 @@ input, button, textarea{
   border: none;
   outline: none;
 }
+
+#root {
+  height: 100vh;
+}
