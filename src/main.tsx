@@ -11,12 +11,7 @@ import Layout from './views/shared/layout';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Layout>
-        <RouterProvider
-          router={router}
-          fallbackElement={<CircularProgress />}
-        />
-      </Layout>
+      <RouterProvider router={router} fallbackElement={<CircularProgress />} />
     </Provider>
   </React.StrictMode>,
 );

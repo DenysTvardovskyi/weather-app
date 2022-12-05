@@ -35,14 +35,20 @@ export const userSlice = createSlice({
             (city) => city.city.name === action.payload.city.name,
           )
         ) {
-          state.cityList = state.cityList.filter(
-            (city: any) => city.city.name !== action.payload.city.name,
+          const Index = state.cityList.findIndex(
+            (city) => city.city.name === action.payload.city.name,
           );
+          state.cityList[Index] = {
+            city: action.payload.city,
+            weather: action.payload.list[0],
+          };
+        } else {
+          state.cityList.push({
+            city: action.payload.city,
+            weather: action.payload.list[0],
+          });
         }
-        state.cityList.push({
-          city: action.payload.city,
-          weather: action.payload.list[0],
-        });
+
         window.localStorage.setItem('cityList', JSON.stringify(state.cityList));
       });
   },

@@ -1,22 +1,29 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link, Typography, useMediaQuery } from '@mui/material';
 
 import WeatherCard from 'components/weather-card';
 import { useSelector } from 'react-redux';
+import { makeStyles } from '@mui/styles';
 
 const SideBar = () => {
   const { cityList } = useSelector((state: any) => state.user);
+  const matches = useMediaQuery('(min-width:1200px)');
   return (
     <Box
-      borderRight='1px solid black'
-      maxWidth={'320px'}
+      display={!matches ? 'flex' : 'inherit'}
+      maxWidth={matches ? '320px' : 'inherit'}
       width={'100%'}
       height={'100%'}
+      maxHeight={matches ? 'inherit' : '160px'}
+      minHeight={matches ? 'inherit' : '150px'}
+      flexDirection={matches ? 'column' : 'row'}
+      borderBottom={matches ? 'none' : '1px solid black'}
       overflow={'auto'}
     >
       <Box>
         <Typography
           p={'15px'}
-          borderBottom={'1px solid black'}
+          height={'100%'}
+          borderBottom={matches ? '1px solid black' : 'none'}
           textAlign={'center'}
         >
           City List
@@ -24,9 +31,9 @@ const SideBar = () => {
       </Box>
       <Box
         boxSizing={'border-box'}
-        rowGap={'10px'}
+        gap={'10px'}
+        flexDirection={matches ? 'column' : 'row'}
         display={'flex'}
-        flexDirection={'column'}
         padding={'10px'}
       >
         {cityList.map((city: any, index: number) => {

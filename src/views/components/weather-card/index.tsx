@@ -7,23 +7,36 @@ import {
   Link,
   Menu,
   MenuItem,
+  useMediaQuery,
 } from '@mui/material';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeCity } from 'slices/userSlice';
 import { fetchWeather } from 'slices/citySlice';
+import { makeStyles } from '@mui/styles';
+import { useLocation } from 'react-router-dom';
 
 const WeatherCard = ({ name, city, weather }: any) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const location = useLocation();
   const open = Boolean(anchorEl);
+  const matches = useMediaQuery('(min-width:1200px)');
+  const [active, setActive] = useState(false);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    location.search === `?lat=${city.coord.lat}&lon=${city.coord.lon}`
+      ? setActive(true)
+      : setActive(false);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -33,8 +46,9 @@ const WeatherCard = ({ name, city, weather }: any) => {
     <Card
       sx={{
         maxWidth: 320,
-        width: '100%',
+        width: matches ? '100%' : 300,
         border: '1px solid black',
+        background: active ? '#c1eca5' : 'inherit',
         transition: '0.3s',
         gap: 5,
         '&:hover': {

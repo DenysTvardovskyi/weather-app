@@ -39,7 +39,11 @@ const CityPage = () => {
         </Link>
       </Box>
       <WeatherInfo
-        data={filteredDataByDay[activeIndex][activeTooltipIndex]}
+        data={
+          (filteredDataByDay[activeIndex] as []).length >= activeTooltipIndex
+            ? filteredDataByDay[activeIndex][activeTooltipIndex]
+            : filteredDataByDay[activeIndex][0]
+        }
         name={city.name}
       />
       <HourChart

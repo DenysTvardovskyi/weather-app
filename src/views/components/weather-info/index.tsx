@@ -19,7 +19,7 @@ const WeatherInfo = ({ data, name }: Props) => {
         <WeatherIconTemp weather={data} />
         <Box>
           <Typography>
-            Precipitation: <strong>{data.pop * 100}</strong>%
+            Precipitation: <strong>{data?.pop * 100}</strong>%
           </Typography>
           <Typography>
             Humidity: <strong>{data.main.humidity}</strong>%
