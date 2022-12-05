@@ -13,11 +13,15 @@ export interface ISearch {
 }
 
 export interface ICity {
-  cityList: IOption[];
   cityWeather: any[];
   city: any;
   coordinates: Coordinate | null;
   weatherByDay: any[];
+  status: Status;
+}
+
+export interface IUser {
+  cityList: any[];
   status: Status;
 }
 

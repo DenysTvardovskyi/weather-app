@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Header from '../header';
 import Footer from '../footer';
 import SideBar from '../side-bar';
@@ -14,22 +14,13 @@ const Layout = ({ children }: any) => {
         width={'100%'}
       >
         <SideBar />
-        <Box
-          display={'flex'}
-          flexDirection={'column'}
-          width={'100%'}
-          borderLeft={'1px solid black'}
-        >
-          <Box width={'100%'}>
-            <Typography
-              p={'15px'}
-              borderBottom={'1px solid black'}
-              textAlign={'center'}
-            >
-              Lviv
-            </Typography>
-          </Box>
-          <Box boxSizing={'border-box'} padding={'10px'} overflow={'auto'}>
+        <Box width={'100%'} borderLeft={'1px solid black'}>
+          <Box
+            boxSizing={'border-box'}
+            padding={'10px'}
+            height={'100%'}
+            overflow={'auto'}
+          >
             {children}
           </Box>
         </Box>

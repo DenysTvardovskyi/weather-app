@@ -12,7 +12,7 @@ import {
 import SearchOption from 'components/search-bar/searchOption';
 import { IOption } from 'application/intefaces/i-option';
 import { IAppState } from 'application/intefaces/i-app';
-import { addCity } from 'slices/citySlice';
+import { fetchWeather } from 'slices/citySlice';
 
 const SearchBar = () => {
   const { criteria, options, value } = useSelector(
@@ -45,7 +45,7 @@ const SearchBar = () => {
       ) => {
         dispatch(setOptions(newValue ? [newValue, ...options] : options));
         dispatch(setValue(newValue));
-        dispatch(addCity(newValue));
+        dispatch(fetchWeather([newValue?.value[0], newValue?.value[1]]));
       }}
       onInputChange={(event, newInputValue) => {
         debouncedSearch(newInputValue);

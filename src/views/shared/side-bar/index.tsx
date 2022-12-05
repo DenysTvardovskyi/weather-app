@@ -1,8 +1,10 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 
 import WeatherCard from 'components/weather-card';
+import { useSelector } from 'react-redux';
 
 const SideBar = () => {
+  const { cityList } = useSelector((state: any) => state.user);
   return (
     <Box
       borderRight='1px solid black'
@@ -27,7 +29,16 @@ const SideBar = () => {
         flexDirection={'column'}
         padding={'10px'}
       >
-        <WeatherCard name={'lviv'} icon={'sun'} temp={0.0} />
+        {cityList.map((city: any, index: number) => {
+          return (
+            <WeatherCard
+              key={index}
+              name={city.city.name}
+              city={city.city}
+              weather={city.weather}
+            />
+          );
+        })}
       </Box>
     </Box>
   );
