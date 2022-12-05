@@ -1,7 +1,12 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import * as React from 'react';
+import { IForecast } from '../../../application/intefaces/i-weather';
 
-const WeatherIconTemp = ({ weather }: any) => {
+interface Props {
+  weather: IForecast;
+}
+
+const WeatherIconTemp = ({ weather }: Props) => {
   const matches = useMediaQuery('(min-width:1200px)');
 
   return (

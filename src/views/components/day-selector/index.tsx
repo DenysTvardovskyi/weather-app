@@ -1,11 +1,12 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
+import { IForecast } from '../../../application/intefaces/i-weather';
 
 interface Props {
-  filteredDataByDay: any[];
+  filteredDataByDay: IForecast[][];
   activeIndex: number;
-  handleClick: (e: any) => void;
+  handleClick: (e: number) => void;
 }
 
 const useStyles = makeStyles({
@@ -45,7 +46,7 @@ const DaySelector = ({
       width={'100%'}
       gap={'5px'}
     >
-      {filteredDataByDay.map((weather: any, index: number) => {
+      {filteredDataByDay.map((weather, index: number) => {
         const data = weather[0];
         const forecast = data.weather[0];
         const weather_temp = data.main;

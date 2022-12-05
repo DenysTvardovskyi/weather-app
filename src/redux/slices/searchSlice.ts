@@ -27,8 +27,8 @@ export const fetchOptions = createAsyncThunk(
         };
       });
       return [...result];
-    } catch (err: any) {
-      return err.message;
+    } catch (err) {
+      return 'error';
     }
   },
 );

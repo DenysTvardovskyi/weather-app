@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICity, IUser } from 'application/intefaces/i-app';
-import { IOption } from 'application/intefaces/i-option';
+import { createSlice } from '@reduxjs/toolkit';
+import { ICityListEl, IUser } from 'application/intefaces/i-app';
 import { fetchWeather } from 'slices/citySlice';
 
 const cities =
@@ -19,7 +18,7 @@ export const userSlice = createSlice({
   reducers: {
     removeCity: (state, action) => {
       state.cityList = state.cityList.filter(
-        (city: any) => city.city.name !== action.payload,
+        (city: ICityListEl) => city.city.name !== action.payload,
       );
       window.localStorage.setItem('cityList', JSON.stringify(state.cityList));
     },

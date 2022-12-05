@@ -23,8 +23,8 @@ export const fetchWeather = createAsyncThunk(
           `forecast?lon=${coordinates[0]}&lat=${coordinates[1]}&units=metric&appid=${WEATHER_API_KEY}`,
       );
       return response.data;
-    } catch (err: any) {
-      return err.message;
+    } catch (err) {
+      return 'error';
     }
   },
 );

@@ -1,9 +1,10 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import WeatherIconTemp from 'components/weather-icon-temp';
 import * as React from 'react';
+import { IForecast } from '../../../application/intefaces/i-weather';
 
 interface Props {
-  data: any;
+  data: IForecast;
   name: string;
 }
 

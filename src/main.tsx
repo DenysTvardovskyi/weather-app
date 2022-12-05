@@ -6,7 +6,6 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from 'router/public-routes';
 import store from './redux/store';
 import './index.css';
-import Layout from './views/shared/layout';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

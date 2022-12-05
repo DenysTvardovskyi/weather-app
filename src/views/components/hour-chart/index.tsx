@@ -1,10 +1,12 @@
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 import { Box } from '@mui/material';
 import * as React from 'react';
+import { IForecast } from '../../../application/intefaces/i-weather';
+import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
 
 interface Props {
-  data: any[];
-  handleClick: (e: any) => void;
+  data: IForecast[];
+  handleClick: (event: CategoricalChartState) => void;
 }
 
 const HourChart = ({ data, handleClick }: Props) => {

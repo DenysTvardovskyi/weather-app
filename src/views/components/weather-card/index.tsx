@@ -8,11 +8,12 @@ import {
 } from '@mui/material';
 import * as React from 'react';
 import MenuButton from 'components/menu-button';
+import { ICityInfo, IForecast } from '../../../application/intefaces/i-weather';
 
 interface Props {
   name: string;
-  city: any;
-  weather: any;
+  city: ICityInfo;
+  weather: IForecast;
   active: boolean;
 }
 

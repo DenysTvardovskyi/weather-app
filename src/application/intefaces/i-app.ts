@@ -1,4 +1,5 @@
 import { Coordinate, IOption } from './i-option';
+import { ICityInfo, IForecast } from './i-weather';
 
 export interface IAppState {
   search: ISearch;
@@ -13,16 +14,21 @@ export interface ISearch {
 }
 
 export interface ICity {
-  cityWeather: any[];
-  city: any;
+  cityWeather: IForecast[];
+  city: ICityInfo;
   coordinates: Coordinate | null;
-  weatherByDay: any[];
+  weatherByDay: IForecast[];
   status: Status;
 }
 
 export interface IUser {
-  cityList: any[];
+  cityList: ICityListEl[];
   status: Status;
+}
+
+export interface ICityListEl {
+  city: ICityInfo;
+  weather: IForecast;
 }
 
 export type Status = 'idle' | 'loading' | 'success' | 'failed';

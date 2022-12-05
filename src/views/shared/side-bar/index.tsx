@@ -3,9 +3,10 @@ import { Box, Typography, useMediaQuery } from '@mui/material';
 import WeatherCard from 'components/weather-card';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { IAppState, ICityListEl } from '../../../application/intefaces/i-app';
 
 const SideBar = () => {
-  const { cityList } = useSelector((state: any) => state.user);
+  const { cityList } = useSelector((state: IAppState) => state.user);
   const location = useLocation();
   const matches = useMediaQuery('(min-width:1200px)');
   return (
@@ -38,7 +39,7 @@ const SideBar = () => {
         padding={'10px'}
       >
         {cityList.length > 0 ? (
-          cityList.map((city: any, index: number) => {
+          cityList.map((city: ICityListEl, index: number) => {
             const Active =
               location.search ===
               `?lat=${city.city.coord.lat}&lon=${city.city.coord.lon}`;
