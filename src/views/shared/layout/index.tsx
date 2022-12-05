@@ -4,14 +4,15 @@ import Footer from '../footer';
 import SideBar from '../side-bar';
 import { Outlet } from 'react-router-dom';
 
-const Layout = ({ children }: any) => {
+const Layout = () => {
   const matches = useMediaQuery('(min-width:1200px)');
+  const tablet = useMediaQuery('(min-width:700px)');
   return (
     <Box height={'100%'} maxHeight={'100vh'} boxSizing={'border-box'}>
       <Header />
       <Box
         display={'flex'}
-        height={'calc(100vh - 130px)'}
+        height={tablet ? 'calc(100vh - 130px)' : '100%'}
         width={'100%'}
         flexDirection={matches ? 'row' : 'column'}
       >

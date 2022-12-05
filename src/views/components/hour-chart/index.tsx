@@ -17,9 +17,9 @@ const HourChart = ({ data, handleClick }: Props) => {
     <Box width={'100%'} height={'100%'}>
       <ResponsiveContainer
         width='100%'
-        minWidth={500}
-        minHeight={300}
-        height={300}
+        minWidth={300}
+        minHeight={150}
+        height='100%'
       >
         <LineChart
           width={700}

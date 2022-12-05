@@ -1,11 +1,12 @@
-import { Box, Link, Typography, useMediaQuery } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 
 import WeatherCard from 'components/weather-card';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@mui/styles';
+import { useLocation } from 'react-router-dom';
 
 const SideBar = () => {
   const { cityList } = useSelector((state: any) => state.user);
+  const location = useLocation();
   const matches = useMediaQuery('(min-width:1200px)');
   return (
     <Box
@@ -36,16 +37,26 @@ const SideBar = () => {
         display={'flex'}
         padding={'10px'}
       >
-        {cityList.map((city: any, index: number) => {
-          return (
-            <WeatherCard
-              key={index}
-              name={city.city.name}
-              city={city.city}
-              weather={city.weather}
-            />
-          );
-        })}
+        {cityList.length > 0 ? (
+          cityList.map((city: any, index: number) => {
+            const Active =
+              location.search ===
+              `?lat=${city.city.coord.lat}&lon=${city.city.coord.lon}`;
+            return (
+              <WeatherCard
+                key={index}
+                name={city.city.name}
+                city={city.city}
+                weather={city.weather}
+                active={Active}
+              />
+            );
+          })
+        ) : (
+          <Box>
+            <Typography>No city selected yet</Typography>
+          </Box>
+        )}
       </Box>
     </Box>
   );

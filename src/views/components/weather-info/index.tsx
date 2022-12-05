@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import WeatherIconTemp from 'components/weather-icon-temp';
 import * as React from 'react';
 
@@ -13,13 +13,14 @@ const WeatherInfo = ({ data, name }: Props) => {
       weekday: 'long',
       hour: 'numeric',
     });
+  const mobileL = useMediaQuery('(min-width:600px)');
   return (
     <Box display={'grid'} gridTemplateColumns={'50% 50%'}>
-      <Box display={'flex'} justifyContent={'space-between'}>
+      <Box display={'flex'} flexDirection={mobileL ? 'row' : 'column'}>
         <WeatherIconTemp weather={data} />
         <Box>
           <Typography>
-            Precipitation: <strong>{data?.pop * 100}</strong>%
+            Precipitation: <strong>{(data?.pop * 100).toFixed(0)}</strong>%
           </Typography>
           <Typography>
             Humidity: <strong>{data.main.humidity}</strong>%

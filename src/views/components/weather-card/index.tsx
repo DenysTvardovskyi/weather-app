@@ -3,42 +3,21 @@ import {
   Card,
   CardActions,
   CardHeader,
-  IconButton,
   Link,
-  Menu,
-  MenuItem,
   useMediaQuery,
 } from '@mui/material';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useDispatch } from 'react-redux';
-import { removeCity } from 'slices/userSlice';
-import { fetchWeather } from 'slices/citySlice';
-import { makeStyles } from '@mui/styles';
-import { useLocation } from 'react-router-dom';
+import MenuButton from 'components/menu-button';
 
-const WeatherCard = ({ name, city, weather }: any) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const location = useLocation();
-  const open = Boolean(anchorEl);
+interface Props {
+  name: string;
+  city: any;
+  weather: any;
+  active: boolean;
+}
+
+const WeatherCard = ({ name, city, weather, active }: Props) => {
   const matches = useMediaQuery('(min-width:1200px)');
-  const [active, setActive] = useState(false);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  useEffect(() => {
-    location.search === `?lat=${city.coord.lat}&lon=${city.coord.lon}`
-      ? setActive(true)
-      : setActive(false);
-  }, []);
-
-  const dispatch = useDispatch();
 
   const icon = weather.weather[0].icon;
   const temp = weather.main;
@@ -65,55 +44,7 @@ const WeatherCard = ({ name, city, weather }: any) => {
             style={{ maxWidth: '45px' }}
           />
         }
-        action={
-          <div>
-            <IconButton
-              aria-label='more'
-              id='long-button'
-              aria-controls={open ? 'long-menu' : undefined}
-              aria-expanded={open ? 'true' : undefined}
-              aria-haspopup='true'
-              onClick={(e) => {
-                e.stopPropagation();
-                handleClick(e);
-              }}
-            >
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              id='long-menu'
-              MenuListProps={{
-                'aria-labelledby': 'long-button',
-              }}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              PaperProps={{
-                style: {
-                  maxHeight: 48 * 4.5,
-                  width: '20ch',
-                },
-              }}
-            >
-              <MenuItem
-                key={'remove'}
-                onClick={() => {
-                  dispatch(removeCity(name));
-                }}
-              >
-                Remove
-              </MenuItem>
-              <MenuItem
-                key={'refresh'}
-                onClick={() => {
-                  dispatch(fetchWeather([city.coord.lon, city.coord.lat]));
-                }}
-              >
-                Refresh
-              </MenuItem>
-            </Menu>
-          </div>
-        }
+        action={<MenuButton />}
         title={name}
         subheader={
           <Box>

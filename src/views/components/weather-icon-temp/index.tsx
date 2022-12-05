@@ -1,10 +1,12 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import * as React from 'react';
 
 const WeatherIconTemp = ({ weather }: any) => {
+  const matches = useMediaQuery('(min-width:1200px)');
+
   return (
     <Box>
-      <Box display={'flex'}>
+      <Box display={'flex'} alignItems={'center'}>
         <img
           src={
             'http://openweathermap.org/img/wn/' +
@@ -12,10 +14,13 @@ const WeatherIconTemp = ({ weather }: any) => {
             '@2x.png'
           }
           loading='lazy'
+          width={matches ? 'auto' : '48px'}
           title={weather.weather[0].main}
           alt={weather.weather[0].description}
         />
-        <Typography fontSize={'48px'}>{weather.main.temp} &#176;</Typography>
+        <Typography fontSize={matches ? '48px' : '24px'}>
+          {weather.main.temp} &#176;
+        </Typography>
       </Box>
     </Box>
   );

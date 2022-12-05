@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery } from '@mui/material';
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
 
@@ -35,12 +35,14 @@ const DaySelector = ({
     new Date(date).toLocaleDateString('en-US', {
       weekday: 'short',
     });
-
+  const matches = useMediaQuery('(min-width:700px)');
   return (
     <Box
       display={'flex'}
-      flexDirection={'row'}
+      flexDirection={matches ? 'row' : 'column'}
       justifyContent={'center'}
+      overflow={'auto'}
+      width={'100%'}
       gap={'5px'}
     >
       {filteredDataByDay.map((weather: any, index: number) => {
@@ -52,6 +54,8 @@ const DaySelector = ({
             boxSizing={'border-box'}
             borderRadius={'5px'}
             border={'1px solid black'}
+            display={matches ? 'block' : 'flex'}
+            justifyContent={matches ? 'flex-start' : 'space-between'}
             padding={'5px 10px'}
             className={
               classes.weekDay + ' ' + (index === activeIndex && classes.active)
@@ -68,9 +72,14 @@ const DaySelector = ({
               }
               loading='lazy'
               title={forecast.main}
+              width={matches ? 'inherit' : '32px'}
               alt={forecast.description}
             />
-            <Box display={'flex'} justifyContent={'space-around'}>
+            <Box
+              display={'flex'}
+              columnGap={'10px'}
+              justifyContent={'space-around'}
+            >
               <Typography fontWeight={'bold'}>
                 {weather_temp.temp_max}
               </Typography>
