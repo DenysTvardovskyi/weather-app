@@ -1,12 +1,12 @@
 import { IAppState } from 'application/intefaces/i-app';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { IForecast } from '../intefaces/i-weather';
+import { useAppSelector } from '../../redux/hooks';
 
 const useSortWeatherByDate = () => {
   const [data, setData] = useState<IForecast[][]>([]);
 
-  const { cityWeather } = useSelector((state: IAppState) => state.city);
+  const { cityWeather } = useAppSelector((state: IAppState) => state.city);
   const filterWeatherByDay = (array: IForecast[], day: number) => {
     return array.filter((item: IForecast) => {
       return new Date(item.dt_txt).getDate() === day;

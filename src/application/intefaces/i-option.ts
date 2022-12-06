@@ -3,7 +3,7 @@ export interface IOption {
   value: Coordinate;
 }
 
-type lat = number;
-type lon = number;
+type lat = number | string;
+type lon = number | string;
 
 export type Coordinate = [lon, lat];

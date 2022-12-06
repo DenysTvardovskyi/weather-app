@@ -3,14 +3,19 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { removeCity } from 'slices/userSlice';
 import { fetchWeather } from 'slices/citySlice';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { ICityInfo } from '../../../application/intefaces/i-weather';
+import { useAppDispatch } from '../../../redux/hooks';
 
-const MenuButton = () => {
+interface Props {
+  city: ICityInfo;
+}
+
+const MenuButton = ({ city }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

@@ -2,7 +2,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { SyntheticEvent, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchOptions,
   setCriteria,
@@ -13,12 +12,13 @@ import SearchOption from 'components/search-bar/searchOption';
 import { IOption } from 'application/intefaces/i-option';
 import { IAppState } from 'application/intefaces/i-app';
 import { fetchWeather } from 'slices/citySlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 const SearchBar = () => {
-  const { criteria, options, value } = useSelector(
+  const { criteria, options, value } = useAppSelector(
     (state: IAppState) => state.search,
   );
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const debouncedSearch = useRef(
     debounce(async (text: string) => {
@@ -45,7 +45,9 @@ const SearchBar = () => {
       ) => {
         dispatch(setOptions(newValue ? [newValue, ...options] : options));
         dispatch(setValue(newValue));
-        dispatch(fetchWeather([newValue?.value[0], newValue?.value[1]]));
+        if (newValue !== null) {
+          dispatch(fetchWeather([newValue?.value[0], newValue?.value[1]]));
+        }
       }}
       onInputChange={(event, newInputValue) => {
         debouncedSearch(newInputValue);

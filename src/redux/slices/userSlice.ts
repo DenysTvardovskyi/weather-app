@@ -4,7 +4,7 @@ import { fetchWeather } from 'slices/citySlice';
 
 const cities =
   localStorage.getItem('cityList') !== null
-    ? JSON.parse(localStorage.getItem('cityList'))
+    ? JSON.parse(localStorage.getItem('cityList') ?? '[]')
     : [];
 
 const initialState: IUser = {

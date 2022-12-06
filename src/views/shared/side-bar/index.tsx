@@ -1,12 +1,12 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 
 import WeatherCard from 'components/weather-card';
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IAppState, ICityListEl } from '../../../application/intefaces/i-app';
+import { useAppSelector } from '../../../redux/hooks';
 
 const SideBar = () => {
-  const { cityList } = useSelector((state: IAppState) => state.user);
+  const { cityList } = useAppSelector((state: IAppState) => state.user);
   const location = useLocation();
   const matches = useMediaQuery('(min-width:1200px)');
   return (

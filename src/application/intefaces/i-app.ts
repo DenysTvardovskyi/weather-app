@@ -4,6 +4,7 @@ import { ICityInfo, IForecast } from './i-weather';
 export interface IAppState {
   search: ISearch;
   city: ICity;
+  user: IUser;
 }
 
 export interface ISearch {
@@ -15,7 +16,7 @@ export interface ISearch {
 
 export interface ICity {
   cityWeather: IForecast[];
-  city: ICityInfo;
+  city: ICityInfo | null;
   coordinates: Coordinate | null;
   weatherByDay: IForecast[];
   status: Status;

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IFeature, ISearch } from 'application/intefaces/i-app';
+import { IOption } from 'application/intefaces/i-option';
 
 const OPTIONS_URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const OPTIONS_API_KEY =
@@ -54,7 +55,7 @@ export const searchSlice = createSlice({
       })
       .addCase(fetchOptions.fulfilled, (state, action) => {
         state.status = 'success';
-        state.options = action.payload;
+        state.options = action.payload as IOption[];
       })
       .addCase(fetchOptions.rejected, (state) => {
         state.status = 'failed';

@@ -45,7 +45,7 @@ const WeatherCard = ({ name, city, weather, active }: Props) => {
             style={{ maxWidth: '45px' }}
           />
         }
-        action={<MenuButton />}
+        action={<MenuButton city={city} />}
         title={name}
         subheader={
           <Box>

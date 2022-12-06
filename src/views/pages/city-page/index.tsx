@@ -1,5 +1,4 @@
 import { Box, CircularProgress } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
 import { IAppState } from 'application/intefaces/i-app';
 import { Link, useLocation } from 'react-router-dom';
 import * as React from 'react';
@@ -9,6 +8,8 @@ import useSortWeatherByDate from '../../../application/hooks/useSortWeatherByDat
 import HourChart from 'components/hour-chart';
 import WeatherInfo from 'components/weather-info';
 import DaySelector from 'components/day-selector';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import ErrorPage from 'pages/error-page';
 
 function useQuery() {
   const { search } = useLocation();
@@ -17,18 +18,20 @@ function useQuery() {
 }
 
 const CityPage = () => {
-  const { city } = useSelector((state: IAppState) => state.city);
+  const { city, status } = useAppSelector((state: IAppState) => state.city);
   const { filteredDataByDay } = useSortWeatherByDate();
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [activeTooltipIndex, setActiveTooltipIndex] = useState<number>(0);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const query = useQuery();
 
   useEffect(() => {
-    dispatch(setCoordinates([query.get('lon'), query.get('lat')]));
-    dispatch(fetchWeather([query.get('lon'), query.get('lat')]));
+    if (query.get('lon') !== null && query.get('lat') !== null) {
+      dispatch(setCoordinates([query.get('lon'), query.get('lat')]));
+      dispatch(fetchWeather([query.get('lon') ?? 0, query.get('lat') ?? 0]));
+    }
   }, []);
 
   return city && filteredDataByDay.length > 0 ? (
@@ -48,7 +51,7 @@ const CityPage = () => {
       />
       <HourChart
         data={filteredDataByDay[activeIndex]}
-        handleClick={(e) => setActiveTooltipIndex(e.activeTooltipIndex)}
+        handleClick={(e) => setActiveTooltipIndex(e.activeTooltipIndex ?? 0)}
       />
       <DaySelector
         filteredDataByDay={filteredDataByDay}
@@ -56,7 +59,7 @@ const CityPage = () => {
         handleClick={(e) => setActiveIndex(e)}
       />
     </Box>
-  ) : (
+  ) : status == 'failed' ? (
     <Box
       sx={{
         display: 'flex',
@@ -69,6 +72,8 @@ const CityPage = () => {
     >
       <CircularProgress color={'inherit'} />
     </Box>
+  ) : (
+    <ErrorPage />
   );
 };
 
