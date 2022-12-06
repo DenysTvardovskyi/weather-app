@@ -6,7 +6,7 @@ import Layout from '../views/shared/layout';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/weather-app/',
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [

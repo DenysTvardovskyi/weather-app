@@ -37,7 +37,7 @@ const CityPage = () => {
   return city && filteredDataByDay.length > 0 ? (
     <Box display={'flex'} boxSizing={'border-box'} flexDirection={'column'}>
       <Box padding={'10px 15px 15px'}>
-        <Link style={{ color: '#000' }} to={'/'}>
+        <Link style={{ color: '#000' }} to={'/weather-app/'}>
           Back
         </Link>
       </Box>

@@ -4,6 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: '/weather-app/',
   resolve: {
     alias: {
       components: path.resolve(__dirname, './src/views/components'),

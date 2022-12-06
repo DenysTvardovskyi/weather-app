@@ -13,7 +13,7 @@ const ErrorPage = () => {
     >
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
-      <Link style={{ color: '#000', margin: '10px 0' }} to={'/'}>
+      <Link style={{ color: '#000', margin: '10px 0' }} to={'/weather-app/'}>
         Back to Dashboard
       </Link>
     </Box>
