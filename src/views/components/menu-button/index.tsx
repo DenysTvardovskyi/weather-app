@@ -57,7 +57,7 @@ const MenuButton = ({ city }: Props) => {
         <MenuItem
           key={'remove'}
           onClick={() => {
-            dispatch(removeCity(name));
+            dispatch(removeCity(city.name));
           }}
         >
           Remove
