@@ -29,6 +29,24 @@ const useSortWeatherByDate = () => {
     return filterWeatherByDay(cityWeather, day);
   });
 
+  const weatherInfo = (activeIndex: number, activeTooltipIndex: number) => {
+    let selectedWeather: IForecast;
+    if ((data[activeIndex] as []).length >= activeTooltipIndex) {
+      selectedWeather = data[activeIndex][activeTooltipIndex];
+    } else {
+      selectedWeather = data[activeIndex][0];
+    }
+
+    return {
+      weather: selectedWeather.weather[0],
+      temp: selectedWeather.main.temp,
+      pop: selectedWeather.pop,
+      humidity: selectedWeather.main.humidity,
+      wind_speed: selectedWeather.wind.speed,
+      dt_txt: selectedWeather.dt_txt,
+    };
+  };
+
   useEffect(() => {
     setData(filteredDataDayByDay);
   }, [cityWeather]);
@@ -36,6 +54,7 @@ const useSortWeatherByDate = () => {
   return {
     filteredDataByDay: data,
     days: dayArray,
+    weatherInfo,
   };
 };
 

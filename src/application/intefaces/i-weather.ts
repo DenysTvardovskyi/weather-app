@@ -63,3 +63,12 @@ export interface IForecast {
   sys: ISys;
   dt_txt: string;
 }
+
+export interface IWeatherInfoData {
+  weather: IWeather;
+  temp: number;
+  pop: number;
+  humidity: number;
+  wind_speed: number;
+  dt_txt: string;
+}

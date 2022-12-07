@@ -10,6 +10,7 @@ import WeatherInfo from 'components/weather-info';
 import DaySelector from 'components/day-selector';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import ErrorPage from 'pages/error-page';
+import Loader from 'components/loader';
 
 function useQuery() {
   const { search } = useLocation();
@@ -19,7 +20,7 @@ function useQuery() {
 
 const CityPage = () => {
   const { city, status } = useAppSelector((state: IAppState) => state.city);
-  const { filteredDataByDay } = useSortWeatherByDate();
+  const { filteredDataByDay, weatherInfo } = useSortWeatherByDate();
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [activeTooltipIndex, setActiveTooltipIndex] = useState<number>(0);
@@ -42,11 +43,7 @@ const CityPage = () => {
         </Link>
       </Box>
       <WeatherInfo
-        data={
-          (filteredDataByDay[activeIndex] as []).length >= activeTooltipIndex
-            ? filteredDataByDay[activeIndex][activeTooltipIndex]
-            : filteredDataByDay[activeIndex][0]
-        }
+        data={weatherInfo(activeIndex, activeTooltipIndex)}
         name={city.name}
       />
       <HourChart
@@ -60,18 +57,7 @@ const CityPage = () => {
       />
     </Box>
   ) : status == 'failed' ? (
-    <Box
-      sx={{
-        display: 'flex',
-        height: '100%',
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'grey.700',
-      }}
-    >
-      <CircularProgress color={'inherit'} />
-    </Box>
+    <Loader />
   ) : (
     <ErrorPage />
   );

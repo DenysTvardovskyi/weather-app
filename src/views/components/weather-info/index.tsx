@@ -1,33 +1,34 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
-import WeatherIconTemp from 'components/weather-icon-temp';
+import WeatherIconTemp from '../weather-icon-temp';
 import * as React from 'react';
-import { IForecast } from '../../../application/intefaces/i-weather';
+import useFormatDate from '../../../../src/application/hooks/useFormatDate';
+import { IWeatherInfoData } from '../../../application/intefaces/i-weather';
 
 interface Props {
-  data: IForecast;
+  data: IWeatherInfoData;
   name: string;
 }
 
 const WeatherInfo = ({ data, name }: Props) => {
-  const formatDate = (date: string | Date) =>
-    new Date(date).toLocaleString('en-US', {
-      weekday: 'long',
-      hour: 'numeric',
-    });
+  const { formatDate } = useFormatDate();
+
   const mobileL = useMediaQuery('(min-width:600px)');
+
+  const precipitation = (data?.pop * 100).toFixed(0);
+
   return (
     <Box display={'grid'} gridTemplateColumns={'50% 50%'}>
       <Box display={'flex'} flexDirection={mobileL ? 'row' : 'column'}>
-        <WeatherIconTemp weather={data} />
+        <WeatherIconTemp weather={data?.weather} temp={data?.temp} />
         <Box>
           <Typography>
-            Precipitation: <strong>{(data?.pop * 100).toFixed(0)}</strong>%
+            Precipitation: <strong>{precipitation}</strong>%
           </Typography>
           <Typography>
-            Humidity: <strong>{data.main.humidity}</strong>%
+            Humidity: <strong>{data?.humidity}</strong>%
           </Typography>
           <Typography>
-            Wind: <strong>{data.wind.speed}</strong> m/s
+            Wind: <strong>{data?.wind_speed}</strong> m/s
           </Typography>
         </Box>
       </Box>
@@ -35,8 +36,13 @@ const WeatherInfo = ({ data, name }: Props) => {
         <Typography fontSize={'22px'} fontWeight={'bold'}>
           {name}
         </Typography>
-        <Typography>{formatDate(data.dt_txt)}</Typography>
-        <Typography>{data.weather[0].main}</Typography>
+        <Typography>
+          {formatDate(data?.dt_txt, {
+            weekday: 'long',
+            hour: 'numeric',
+          })}
+        </Typography>
+        <Typography>{data?.weather?.main}</Typography>
       </Box>
     </Box>
   );
