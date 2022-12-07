@@ -20,12 +20,12 @@ describe('weather-info', () => {
     const name = 'Test';
 
     render(<WeatherInfo data={mockedData} name={name} />);
-
+    expect(screen.getByTestId('weather-icon-temp')).toBeInTheDocument();
     expect(screen.getByText('33')).toBeInTheDocument();
     expect(screen.getByText('98')).toBeInTheDocument();
     expect(screen.getByText('2.28')).toBeInTheDocument();
     expect(screen.getByText('Test')).toBeInTheDocument();
-    expect(screen.getByText('Test')).toBeInTheDocument();
+    expect(screen.getByText('Tuesday, 9 PM')).toBeInTheDocument();
     expect(screen.getByText('Clouds')).toBeInTheDocument();
   });
 });

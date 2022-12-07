@@ -11,7 +11,7 @@ const WeatherIconTemp = ({ weather, temp }: Props) => {
   const matches = useMediaQuery('(min-width:1200px)');
 
   return (
-    <Box>
+    <Box data-testid={'weather-icon-temp'}>
       <Box display={'flex'} alignItems={'center'}>
         <img
           src={'http://openweathermap.org/img/wn/' + weather?.icon + '@2x.png'}

@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 import { IAppState } from 'application/intefaces/i-app';
 import { Link, useLocation } from 'react-router-dom';
 import * as React from 'react';
