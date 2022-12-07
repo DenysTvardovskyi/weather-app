@@ -13,7 +13,7 @@ const Loader = () => {
         color: 'grey.700',
       }}
     >
-      <CircularProgress color={'inherit'} />
+      <CircularProgress data-testid='loader' color={'inherit'} />
     </Box>
   );
 };
