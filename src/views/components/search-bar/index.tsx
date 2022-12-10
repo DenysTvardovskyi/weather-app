@@ -1,17 +1,20 @@
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete, {
+  AutocompleteRenderInputParams,
+} from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { SyntheticEvent, useEffect, useRef } from 'react';
+import { HTMLAttributes, SyntheticEvent, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
+import * as React from 'react';
 import {
   fetchOptions,
   setCriteria,
   setOptions,
   setValue,
-} from 'slices/searchSlice';
-import SearchOption from 'components/search-bar/searchOption';
-import { IOption } from 'application/intefaces/i-option';
-import { IAppState } from 'application/intefaces/i-app';
-import { fetchWeather } from 'slices/citySlice';
+} from '../../../redux/slices/searchSlice';
+import SearchOption from './searchOption';
+import { IOption } from '../../../application/intefaces/i-option';
+import { IAppState } from '../../../application/intefaces/i-app';
+import { fetchWeather } from '../../../redux/slices/citySlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 const SearchBar = () => {
@@ -27,6 +30,40 @@ const SearchBar = () => {
     }, 300),
   ).current;
 
+  const handleCriteriaChange = (
+    event: SyntheticEvent<Element, Event>,
+    newValue: IOption | null,
+  ) => {
+    dispatch(setOptions(newValue ? [newValue, ...options] : options));
+    dispatch(setValue(newValue));
+    if (newValue !== null) {
+      dispatch(fetchWeather([newValue?.value[0], newValue?.value[1]]));
+    }
+  };
+
+  const handleInputChange = (event: SyntheticEvent, newInputValue: string) => {
+    debouncedSearch(newInputValue);
+  };
+
+  const searchInput = (params: AutocompleteRenderInputParams) => (
+    <TextField
+      {...params}
+      data-testid={'searchInput'}
+      placeholder={'Add a location'}
+      label='Add a location'
+      fullWidth
+    />
+  );
+
+  const renderOption = (
+    props: HTMLAttributes<HTMLElement>,
+    option: IOption,
+  ) => (
+    <li {...props}>
+      <SearchOption option={option} criteria={criteria} />
+    </li>
+  );
+
   useEffect(() => {
     return () => {
       debouncedSearch.cancel();
@@ -39,29 +76,12 @@ const SearchBar = () => {
       id='combo-box-demo'
       options={options}
       value={value}
-      onChange={(
-        event: SyntheticEvent<Element, Event>,
-        newValue: IOption | null,
-      ) => {
-        dispatch(setOptions(newValue ? [newValue, ...options] : options));
-        dispatch(setValue(newValue));
-        if (newValue !== null) {
-          dispatch(fetchWeather([newValue?.value[0], newValue?.value[1]]));
-        }
-      }}
-      onInputChange={(event, newInputValue) => {
-        debouncedSearch(newInputValue);
-      }}
-      renderInput={(params) => (
-        <TextField {...params} label='Add a location' fullWidth />
-      )}
+      onChange={handleCriteriaChange}
+      onInputChange={handleInputChange}
+      renderInput={searchInput}
       sx={{ width: 300 }}
       filterOptions={(x) => x}
-      renderOption={(props, option: IOption) => (
-        <li {...props}>
-          <SearchOption option={option} criteria={criteria} />
-        </li>
-      )}
+      renderOption={renderOption}
     />
   );
 };

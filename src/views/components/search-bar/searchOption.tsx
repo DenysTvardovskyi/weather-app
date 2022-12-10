@@ -1,6 +1,7 @@
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
 import Grid from '@mui/material/Grid';
+import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { IOption } from 'application/intefaces/i-option';
 
@@ -17,13 +18,8 @@ const SearchOption = (props: Props) => {
     <Grid container alignItems='center'>
       <Grid item xs>
         {parts.map((part, index) => (
-          <span
-            key={index}
-            style={{
-              fontWeight: part.highlight ? 700 : 400,
-            }}
-          >
-            {part.text}
+          <span key={index} data-testid={`criteria-highlight-${index}`}>
+            {part.highlight ? <strong>{part.text}</strong> : part.text}
           </span>
         ))}
         <Typography variant='body2' color='text.secondary'>

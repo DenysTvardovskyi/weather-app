@@ -7,21 +7,19 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import * as React from 'react';
-import MenuButton from 'components/menu-button';
-import { ICityInfo, IForecast } from '../../../application/intefaces/i-weather';
+import MenuButton from '../menu-button';
+import { ICoord, IMain } from '../../../application/intefaces/i-weather';
 
 interface Props {
   name: string;
-  city: ICityInfo;
-  weather: IForecast;
+  main_temp: IMain;
+  icon: string;
+  coord: ICoord;
   active: boolean;
 }
 
-const WeatherCard = ({ name, city, weather, active }: Props) => {
+const WeatherCard = ({ name, icon, main_temp, coord, active }: Props) => {
   const matches = useMediaQuery('(min-width:1200px)');
-
-  const icon = weather.weather[0].icon;
-  const temp = weather.main;
   return (
     <Card
       sx={{
@@ -35,6 +33,7 @@ const WeatherCard = ({ name, city, weather, active }: Props) => {
           background: '#d9d9d9',
         },
       }}
+      data-testid={'weather-card'}
     >
       <CardHeader
         avatar={
@@ -45,17 +44,18 @@ const WeatherCard = ({ name, city, weather, active }: Props) => {
             style={{ maxWidth: '45px' }}
           />
         }
-        action={<MenuButton city={city} />}
+        action={<MenuButton coord={coord} name={name} />}
         title={name}
         subheader={
           <Box>
-            <strong>{temp.temp_max}&#176;</strong> {temp.temp_min}&#176;
+            <strong>{main_temp.temp_max}&#176;</strong> {main_temp.temp_min}
+            &#176;
           </Box>
         }
       />
       <CardActions disableSpacing>
         <Link
-          href={`/weather-app/weather?lat=${city.coord.lat}&lon=${city.coord.lon}`}
+          href={`/weather-app/weather?lat=${coord.lat}&lon=${coord.lon}`}
           sx={{
             color: '#000',
             textDecoration: 'none',

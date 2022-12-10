@@ -1,6 +1,6 @@
 import { IAppState } from 'application/intefaces/i-app';
 import { useEffect, useState } from 'react';
-import { IForecast } from '../intefaces/i-weather';
+import { IForecast, IWeatherInfoData } from '../intefaces/i-weather';
 import { useAppSelector } from '../../redux/hooks';
 
 const useSortWeatherByDate = () => {
@@ -29,7 +29,10 @@ const useSortWeatherByDate = () => {
     return filterWeatherByDay(cityWeather, day);
   });
 
-  const weatherInfo = (activeIndex: number, activeTooltipIndex: number) => {
+  const weatherInfo = (
+    activeIndex: number,
+    activeTooltipIndex: number,
+  ): IWeatherInfoData => {
     let selectedWeather: IForecast;
     if ((data[activeIndex] as []).length >= activeTooltipIndex) {
       selectedWeather = data[activeIndex][activeTooltipIndex];
@@ -39,9 +42,9 @@ const useSortWeatherByDate = () => {
 
     return {
       weather: selectedWeather.weather[0],
-      temp: selectedWeather.main.temp,
+      temp: selectedWeather.main.temp ?? 0,
       pop: selectedWeather.pop,
-      humidity: selectedWeather.main.humidity,
+      humidity: selectedWeather.main.humidity ?? 0,
       wind_speed: selectedWeather.wind.speed,
       dt_txt: selectedWeather.dt_txt,
     };

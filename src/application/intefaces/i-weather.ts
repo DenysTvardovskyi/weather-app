@@ -6,10 +6,7 @@ export interface IWeatherResponse {
 }
 
 export interface ICityInfo {
-  coord: {
-    lat: number;
-    lon: number;
-  };
+  coord: ICoord;
   country: string;
   id: number;
   name: string;
@@ -19,16 +16,21 @@ export interface ICityInfo {
   timezone: number;
 }
 
+export interface ICoord {
+  lat: number;
+  lon: number;
+}
+
 export interface IMain {
-  temp: number;
-  feels_like: number;
-  temp_min: number;
-  temp_max: number;
-  pressure: number;
-  sea_level: number;
-  grnd_level: number;
-  humidity: number;
-  temp_kf: number;
+  temp?: number;
+  feels_like?: number;
+  temp_min?: number;
+  temp_max?: number;
+  pressure?: number;
+  sea_level?: number;
+  grnd_level?: number;
+  humidity?: number;
+  temp_kf?: number;
 }
 
 export interface IWeather {

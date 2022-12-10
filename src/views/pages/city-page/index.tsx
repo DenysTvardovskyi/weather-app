@@ -3,14 +3,14 @@ import { IAppState } from 'application/intefaces/i-app';
 import { Link, useLocation } from 'react-router-dom';
 import * as React from 'react';
 import { useEffect, useMemo, useState } from 'react';
-import { fetchWeather, setCoordinates } from 'slices/citySlice';
+import { fetchWeather, setCoordinates } from '../../../redux/slices/citySlice';
 import useSortWeatherByDate from '../../../application/hooks/useSortWeatherByDate';
-import HourChart from 'components/hour-chart';
-import WeatherInfo from 'components/weather-info';
-import DaySelector from 'components/day-selector';
+import HourChart from '../../components/hour-chart';
+import WeatherInfo from '../../components/weather-info';
+import DaySelector from '../../components/day-selector';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import ErrorPage from 'pages/error-page';
-import Loader from 'components/loader';
+import ErrorPage from '../../pages/error-page';
+import Loader from '../../components/loader';
 
 function useQuery() {
   const { search } = useLocation();
@@ -36,7 +36,12 @@ const CityPage = () => {
   }, []);
 
   return city && filteredDataByDay.length > 0 ? (
-    <Box display={'flex'} boxSizing={'border-box'} flexDirection={'column'}>
+    <Box
+      display={'flex'}
+      data-testid={'city-page'}
+      boxSizing={'border-box'}
+      flexDirection={'column'}
+    >
       <Box padding={'10px 15px 15px'}>
         <Link style={{ color: '#000' }} to={'/weather-app/'}>
           Back
@@ -48,7 +53,9 @@ const CityPage = () => {
       />
       <HourChart
         data={filteredDataByDay[activeIndex]}
-        handleClick={(e) => setActiveTooltipIndex(e.activeTooltipIndex ?? 0)}
+        handleClick={(e) => {
+          setActiveTooltipIndex(e.activeTooltipIndex ?? 0);
+        }}
       />
       <DaySelector
         filteredDataByDay={filteredDataByDay}

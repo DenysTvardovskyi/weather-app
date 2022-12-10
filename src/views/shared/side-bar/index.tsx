@@ -1,6 +1,6 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 
-import WeatherCard from 'components/weather-card';
+import WeatherCard from '../../components/weather-card';
 import { useLocation } from 'react-router-dom';
 import { IAppState, ICityListEl } from '../../../application/intefaces/i-app';
 import { useAppSelector } from '../../../redux/hooks';
@@ -47,8 +47,9 @@ const SideBar = () => {
               <WeatherCard
                 key={index}
                 name={city.city.name}
-                city={city.city}
-                weather={city.weather}
+                coord={city.city.coord}
+                main_temp={city.weather.main}
+                icon={city.weather.weather[0].icon}
                 active={Active}
               />
             );

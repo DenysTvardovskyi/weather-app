@@ -1,17 +1,18 @@
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { removeCity } from 'slices/userSlice';
-import { fetchWeather } from 'slices/citySlice';
+import { removeCity } from '../../../redux/slices/userSlice';
+import { fetchWeather } from '../../../redux/slices/citySlice';
 import * as React from 'react';
 import { useState } from 'react';
-import { ICityInfo } from '../../../application/intefaces/i-weather';
+import { ICoord } from '../../../application/intefaces/i-weather';
 import { useAppDispatch } from '../../../redux/hooks';
 
 interface Props {
-  city: ICityInfo;
+  coord: ICoord;
+  name: string;
 }
 
-const MenuButton = ({ city }: Props) => {
+const MenuButton = ({ coord, name }: Props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -57,7 +58,7 @@ const MenuButton = ({ city }: Props) => {
         <MenuItem
           key={'remove'}
           onClick={() => {
-            dispatch(removeCity(city.name));
+            dispatch(removeCity(name));
           }}
         >
           Remove
@@ -65,7 +66,7 @@ const MenuButton = ({ city }: Props) => {
         <MenuItem
           key={'refresh'}
           onClick={() => {
-            dispatch(fetchWeather([city.coord.lon, city.coord.lat]));
+            dispatch(fetchWeather([coord.lon, coord.lat]));
           }}
         >
           Refresh

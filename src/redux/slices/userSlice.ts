@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ICityListEl, IUser } from 'application/intefaces/i-app';
-import { fetchWeather } from 'slices/citySlice';
+import { fetchWeather } from '../slices/citySlice';
 
 const cities =
   localStorage.getItem('cityList') !== null

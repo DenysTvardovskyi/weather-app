@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import * as React from 'react';
 
 const ErrorPage = () => {
   return (

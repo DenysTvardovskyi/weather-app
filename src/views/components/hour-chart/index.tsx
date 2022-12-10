@@ -1,5 +1,13 @@
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import { Box } from '@mui/material';
+import useFormatDate from '../../../application/hooks/useFormatDate';
 import * as React from 'react';
 import { IForecast } from '../../../application/intefaces/i-weather';
 import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
@@ -10,13 +18,10 @@ interface Props {
 }
 
 const HourChart = ({ data, handleClick }: Props) => {
-  const formatTime = (time: string) =>
-    new Date(time).toLocaleTimeString('en-US', {
-      hour: 'numeric',
-    });
+  const { formatDate } = useFormatDate();
 
   return (
-    <Box width={'100%'} height={'100%'}>
+    <Box width={'100%'} data-testid={'chart-cont'} height={'100%'}>
       <ResponsiveContainer
         width='100%'
         minWidth={300}
@@ -35,7 +40,14 @@ const HourChart = ({ data, handleClick }: Props) => {
             bottom: 5,
           }}
         >
-          <XAxis dataKey={(d) => formatTime(d.dt_txt)} />
+          <XAxis
+            dataKey={(d) =>
+              formatDate(d.dt_txt, {
+                hour: 'numeric',
+              })
+            }
+          />
+          <YAxis />
           <Tooltip />
           <Line
             type='monotone'

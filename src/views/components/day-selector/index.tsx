@@ -1,7 +1,7 @@
-import { Box, Typography, useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import * as React from 'react';
-import { makeStyles } from '@mui/styles';
 import { IForecast } from '../../../application/intefaces/i-weather';
+import DaySelectorItem from '../day-selector-item';
 
 interface Props {
   filteredDataByDay: IForecast[][];
@@ -9,33 +9,11 @@ interface Props {
   handleClick: (e: number) => void;
 }
 
-const useStyles = makeStyles({
-  weekDay: {
-    color: '#000',
-    cursor: 'pointer',
-    transition: '0.3s',
-    '&:hover': {
-      backgroundColor: '#000',
-      color: '#fff',
-    },
-  },
-  active: {
-    backgroundColor: '#000',
-    color: '#fff',
-  },
-});
-
 const DaySelector = ({
   filteredDataByDay,
   activeIndex,
   handleClick,
 }: Props) => {
-  const classes = useStyles();
-
-  const formatDate = (date: string | Date) =>
-    new Date(date).toLocaleDateString('en-US', {
-      weekday: 'short',
-    });
   const matches = useMediaQuery('(min-width:700px)');
   return (
     <Box
@@ -51,42 +29,15 @@ const DaySelector = ({
         const forecast = data.weather[0];
         const weather_temp = data.main;
         return (
-          <Box
-            boxSizing={'border-box'}
-            borderRadius={'5px'}
-            border={'1px solid black'}
-            display={matches ? 'block' : 'flex'}
-            justifyContent={matches ? 'flex-start' : 'space-between'}
-            padding={'5px 10px'}
-            className={
-              classes.weekDay + ' ' + (index === activeIndex && classes.active)
-            }
+          <DaySelectorItem
             key={index}
-            onClick={() => handleClick(index)}
-          >
-            <Typography>
-              {index === 0 ? 'Today' : formatDate(data.dt_txt)}
-            </Typography>
-            <img
-              src={
-                'http://openweathermap.org/img/wn/' + forecast.icon + '@2x.png'
-              }
-              loading='lazy'
-              title={forecast.main}
-              width={matches ? 'inherit' : '32px'}
-              alt={forecast.description}
-            />
-            <Box
-              display={'flex'}
-              columnGap={'10px'}
-              justifyContent={'space-around'}
-            >
-              <Typography fontWeight={'bold'}>
-                {weather_temp.temp_max}
-              </Typography>
-              <Typography>{weather_temp.temp_min}</Typography>
-            </Box>
-          </Box>
+            forecast={forecast}
+            weather_temp={weather_temp}
+            handleClick={handleClick}
+            index={index}
+            date={data.dt_txt}
+            activeIndex={activeIndex}
+          />
         );
       })}
     </Box>

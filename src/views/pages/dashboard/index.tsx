@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import SearchBar from 'components/search-bar';
+import * as React from 'react';
+import SearchBar from '../../components/search-bar';
 
 const Dashboard = () => {
   return (
@@ -8,6 +9,7 @@ const Dashboard = () => {
       height={'100%'}
       justifyContent={'center'}
       alignItems={'center'}
+      data-testid={'dashboard'}
     >
       <SearchBar />
     </Box>

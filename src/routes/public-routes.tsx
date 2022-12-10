@@ -1,10 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Dashboard from 'pages/dashboard';
-import CityPage from 'pages/city-page';
-import ErrorPage from 'pages/error-page';
+import Dashboard from '../views/pages/dashboard';
+import CityPage from '../views/pages/city-page';
+import ErrorPage from '../views/pages/error-page';
+import * as React from 'react';
 import Layout from '../views/shared/layout';
 
-export const router = createBrowserRouter([
+export const routerConfig = [
   {
     path: '/weather-app/',
     element: <Layout />,
@@ -20,4 +20,4 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+];

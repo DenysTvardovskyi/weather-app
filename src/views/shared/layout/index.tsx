@@ -2,6 +2,7 @@ import { Box, useMediaQuery } from '@mui/material';
 import Header from '../header';
 import Footer from '../footer';
 import SideBar from '../side-bar';
+import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {

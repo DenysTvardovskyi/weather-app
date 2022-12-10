@@ -1,6 +1,6 @@
 export interface IOption {
   label: string;
-  value: Coordinate;
+  value: Coordinate | number[];
 }
 
 type lat = number | string;
