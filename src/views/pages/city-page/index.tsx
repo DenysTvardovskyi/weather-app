@@ -43,7 +43,7 @@ const CityPage = () => {
       flexDirection={'column'}
     >
       <Box padding={'10px 15px 15px'}>
-        <Link style={{ color: '#000' }} to={'/weather-app/'}>
+        <Link style={{ color: '#000' }} to={'/'}>
           Back
         </Link>
       </Box>

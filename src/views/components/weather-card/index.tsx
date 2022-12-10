@@ -55,7 +55,7 @@ const WeatherCard = ({ name, icon, main_temp, coord, active }: Props) => {
       />
       <CardActions disableSpacing>
         <Link
-          href={`/weather-app/weather?lat=${coord.lat}&lon=${coord.lon}`}
+          href={`/weather-app/#/weather?lat=${coord.lat}&lon=${coord.lon}`}
           sx={{
             color: '#000',
             textDecoration: 'none',

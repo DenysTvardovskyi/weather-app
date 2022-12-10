@@ -6,6 +6,7 @@ import { IOption } from 'application/intefaces/i-option';
 const OPTIONS_URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
 const OPTIONS_API_KEY =
   'pk.eyJ1IjoidGRtZGVuIiwiYSI6ImNsYjg1bXhkejBnYWkzcGxrcm03eWQ1YWIifQ.2l4UJvJG6pg33e05Az6KmQ';
+
 const initialState: ISearch = {
   criteria: '',
   options: [],

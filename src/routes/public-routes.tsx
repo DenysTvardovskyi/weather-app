@@ -6,7 +6,7 @@ import Layout from '../views/shared/layout';
 
 export const routerConfig = [
   {
-    path: '/weather-app/',
+    path: '/',
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
