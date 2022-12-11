@@ -3,9 +3,8 @@ import axios from 'axios';
 import { IFeature, ISearch } from 'application/intefaces/i-app';
 import { IOption } from 'application/intefaces/i-option';
 
-const OPTIONS_URL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
-const OPTIONS_API_KEY =
-  'pk.eyJ1IjoidGRtZGVuIiwiYSI6ImNsYjg1bXhkejBnYWkzcGxrcm03eWQ1YWIifQ.2l4UJvJG6pg33e05Az6KmQ';
+const OPTIONS_URL = import.meta.env.VITE_OPTIONS_URL;
+const OPTIONS_API_KEY = import.meta.env.VITE_OPTIONS_API_KEY;
 
 const initialState: ISearch = {
   criteria: '',
@@ -30,7 +29,7 @@ export const fetchOptions = createAsyncThunk(
       });
       return [...result];
     } catch (err) {
-      return 'error';
+      return err;
     }
   },
 );

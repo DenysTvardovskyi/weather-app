@@ -9,6 +9,10 @@ const store = configureStore({
     search: searchSliceReducer,
     user: userSliceReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

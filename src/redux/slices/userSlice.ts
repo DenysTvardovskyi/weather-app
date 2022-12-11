@@ -2,10 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ICityListEl, IUser } from 'application/intefaces/i-app';
 import { fetchWeather } from '../slices/citySlice';
 
-const cities =
-  localStorage.getItem('cityList') !== null
-    ? JSON.parse(localStorage.getItem('cityList') ?? '[]')
-    : [];
+const cities = JSON.parse(localStorage.getItem('cityList') ?? '[]');
 
 const initialState: IUser = {
   cityList: cities,

@@ -3,8 +3,8 @@ import { ICity } from 'application/intefaces/i-app';
 import { Coordinate } from 'application/intefaces/i-option';
 import axios from 'axios';
 
-const WEATHER_URL = 'https://api.openweathermap.org/data/2.5/';
-const WEATHER_API_KEY = 'a8efff59c2b5c3436b8724b3620fe537';
+const WEATHER_URL = import.meta.env.VITE_WEATHER_URL;
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 const initialState: ICity = {
   city: null,
