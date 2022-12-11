@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { ICity } from 'application/intefaces/i-app';
 import { Coordinate } from 'application/intefaces/i-option';
-import axios from 'axios';
 
 const WEATHER_URL = import.meta.env.VITE_WEATHER_URL;
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
@@ -24,7 +24,7 @@ export const fetchWeather = createAsyncThunk(
       );
       return response.data;
     } catch (err) {
-      return 'error';
+      return err;
     }
   },
 );
@@ -45,7 +45,7 @@ export const citySlice = createSlice({
       .addCase(fetchWeather.fulfilled, (state, action) => {
         state.status = 'success';
         state.city = action.payload.city;
-        state.cityWeather = [...action.payload.list];
+        state.cityWeather = action.payload.list;
       })
       .addCase(fetchWeather.rejected, (state) => {
         state.status = 'failed';

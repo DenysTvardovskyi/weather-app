@@ -1,7 +1,7 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import WeatherIconTemp from '../weather-icon-temp';
 import * as React from 'react';
-import useFormatDate from '../../../../src/application/hooks/useFormatDate';
+import formatDate from '../../../application/utils/useFormatDate';
 import { IWeatherInfoData } from '../../../application/intefaces/i-weather';
 
 interface Props {
@@ -10,8 +10,6 @@ interface Props {
 }
 
 const WeatherInfo = ({ data, name }: Props) => {
-  const { formatDate } = useFormatDate();
-
   const mobileL = useMediaQuery('(min-width:600px)');
 
   const precipitation = (data?.pop * 100).toFixed(0);

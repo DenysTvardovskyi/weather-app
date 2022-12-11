@@ -1,5 +1,5 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
-import useFormatDate from '../../../application/hooks/useFormatDate';
+import formatDate from '../../../application/utils/useFormatDate';
 import * as React from 'react';
 
 import { makeStyles } from '@mui/styles';
@@ -39,8 +39,6 @@ const DaySelectorItem = ({
   handleClick,
 }: Props) => {
   const classes = useStyles();
-
-  const { formatDate } = useFormatDate();
 
   const matches = useMediaQuery('(min-width:700px)');
   return (

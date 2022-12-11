@@ -38,7 +38,6 @@ describe('Search redux state tests', () => {
     store.dispatch(setCriteria('Lvi'));
     const citeria = store.getState().search.criteria;
     expect(citeria).toEqual('Lvi');
-
     const result = await store.dispatch(fetchOptions(citeria));
     const options = result.payload;
 

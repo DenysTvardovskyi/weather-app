@@ -7,7 +7,7 @@ import {
   YAxis,
 } from 'recharts';
 import { Box } from '@mui/material';
-import useFormatDate from '../../../application/hooks/useFormatDate';
+import formatDate from '../../../application/utils/useFormatDate';
 import * as React from 'react';
 import { IForecast } from '../../../application/intefaces/i-weather';
 import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
@@ -18,8 +18,6 @@ interface Props {
 }
 
 const HourChart = ({ data, handleClick }: Props) => {
-  const { formatDate } = useFormatDate();
-
   return (
     <Box width={'100%'} data-testid={'chart-cont'} height={'100%'}>
       <ResponsiveContainer

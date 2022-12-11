@@ -28,20 +28,19 @@ const MenuButton = ({ coord, name }: Props) => {
   return (
     <div>
       <IconButton
+        data-testid={'menu-icon'}
         aria-label='more'
         id='long-button'
         aria-controls={open ? 'long-menu' : undefined}
         aria-expanded={open ? 'true' : undefined}
         aria-haspopup='true'
-        onClick={(e) => {
-          e.stopPropagation();
-          handleClick(e);
-        }}
+        onClick={handleClick}
       >
         <MoreVertIcon />
       </IconButton>
       <Menu
         id='long-menu'
+        data-testid='menu-body'
         MenuListProps={{
           'aria-labelledby': 'long-button',
         }}

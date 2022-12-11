@@ -56,9 +56,6 @@ export const searchSlice = createSlice({
       .addCase(fetchOptions.fulfilled, (state, action) => {
         state.status = 'success';
         state.options = action.payload as IOption[];
-      })
-      .addCase(fetchOptions.rejected, (state) => {
-        state.status = 'failed';
       });
   },
 });

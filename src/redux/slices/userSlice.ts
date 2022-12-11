@@ -1,12 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
 import { ICityListEl, IUser } from 'application/intefaces/i-app';
-import { fetchWeather } from '../slices/citySlice';
+import { fetchWeather } from './citySlice';
+import { IWeatherResponse } from '../../application/intefaces/i-weather';
 
 const cities = JSON.parse(localStorage.getItem('cityList') ?? '[]');
 
 const initialState: IUser = {
   cityList: cities,
   status: 'idle',
+};
+
+const checkIfCityExists = (
+  state: Draft<IUser>,
+  action: PayloadAction<IWeatherResponse>,
+) => state.cityList.find((city) => city.city.name === action.payload.city.name);
+
+const handleDuplicatedCity = (
+  state: Draft<IUser>,
+  action: PayloadAction<IWeatherResponse>,
+) => {
+  if (checkIfCityExists(state, action)) {
+    const Index = state.cityList.findIndex(
+      (city) => city.city.name === action.payload.city.name,
+    );
+    state.cityList[Index] = {
+      city: action.payload.city,
+      weather: action.payload.list[0],
+    };
+  } else {
+    state.cityList.push({
+      city: action.payload.city,
+      weather: action.payload.list?.[0],
+    });
+  }
+
+  window.localStorage.setItem('cityList', JSON.stringify(state.cityList));
 };
 
 export const userSlice = createSlice({
@@ -19,6 +47,9 @@ export const userSlice = createSlice({
       );
       window.localStorage.setItem('cityList', JSON.stringify(state.cityList));
     },
+    addCity: (state, action) => {
+      handleDuplicatedCity(state, action);
+    },
   },
   extraReducers(builder) {
     builder
@@ -26,30 +57,11 @@ export const userSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchWeather.fulfilled, (state, action) => {
-        if (
-          state.cityList.find(
-            (city) => city.city.name === action.payload.city.name,
-          )
-        ) {
-          const Index = state.cityList.findIndex(
-            (city) => city.city.name === action.payload.city.name,
-          );
-          state.cityList[Index] = {
-            city: action.payload.city,
-            weather: action.payload.list[0],
-          };
-        } else {
-          state.cityList.push({
-            city: action.payload.city,
-            weather: action.payload.list[0],
-          });
-        }
-
-        window.localStorage.setItem('cityList', JSON.stringify(state.cityList));
+        handleDuplicatedCity(state, action);
       });
   },
 });
 
-export const { removeCity } = userSlice.actions;
+export const { removeCity, addCity } = userSlice.actions;
 
 export default userSlice.reducer;
