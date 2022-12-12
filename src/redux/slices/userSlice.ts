@@ -50,6 +50,9 @@ export const userSlice = createSlice({
     addCity: (state, action) => {
       handleDuplicatedCity(state, action);
     },
+    setCityList: (state, action) => {
+      state.cityList = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -62,6 +65,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { removeCity, addCity } = userSlice.actions;
+export const { removeCity, addCity, setCityList } = userSlice.actions;
 
 export default userSlice.reducer;

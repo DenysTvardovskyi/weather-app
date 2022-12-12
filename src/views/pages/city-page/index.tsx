@@ -33,7 +33,7 @@ const CityPage = () => {
       dispatch(setCoordinates([query.get('lon'), query.get('lat')]));
       dispatch(fetchWeather([query.get('lon') ?? 0, query.get('lat') ?? 0]));
     }
-  }, []);
+  }, [query]);
 
   return city && filteredDataByDay.length > 0 ? (
     <Box
@@ -63,7 +63,7 @@ const CityPage = () => {
         handleClick={(e) => setActiveIndex(e)}
       />
     </Box>
-  ) : status == 'failed' ? (
+  ) : status == 'loading' ? (
     <Loader />
   ) : (
     <ErrorPage />

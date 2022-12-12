@@ -7,6 +7,7 @@ const Header = () => {
       <Box
         borderBottom='1px solid black'
         alignItems={'center'}
+        data-testid={'header'}
         height={'65px'}
         padding={'20px 10px'}
       >

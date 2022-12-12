@@ -18,8 +18,8 @@ export const fetchOptions = createAsyncThunk(
   async (criteria: string) => {
     try {
       const response = await axios.get(
-        OPTIONS_URL +
-          `${criteria}.json?access_token=${OPTIONS_API_KEY}&cachebuster=1625641871908&autocomplete=true&types=place`,
+        'https://api.mapbox.com/geocoding/v5/mapbox.places/' +
+          `${criteria}.json?access_token=pk.eyJ1IjoidGRtZGVuIiwiYSI6ImNsYjg1bXhkejBnYWkzcGxrcm03eWQ1YWIifQ.2l4UJvJG6pg33e05Az6KmQ&cachebuster=1625641871908&autocomplete=true&types=place`,
       );
       const result = response.data.features.map((item: IFeature) => {
         return {

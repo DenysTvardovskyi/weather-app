@@ -7,6 +7,7 @@ const useSortWeatherByDate = () => {
   const [data, setData] = useState<IForecast[][]>([]);
 
   const { cityWeather } = useAppSelector((state: IAppState) => state.city);
+
   const filterWeatherByDay = (array: IForecast[], day: number) => {
     return array.filter((item: IForecast) => {
       return new Date(item.dt_txt).getDate() === day;
@@ -56,7 +57,6 @@ const useSortWeatherByDate = () => {
 
   return {
     filteredDataByDay: data,
-    days: dayArray,
     weatherInfo,
   };
 };

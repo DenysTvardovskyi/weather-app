@@ -1,8 +1,8 @@
+import * as React from 'react';
 import { Box, useMediaQuery } from '@mui/material';
 import Header from '../header';
 import Footer from '../footer';
 import SideBar from '../side-bar';
-import * as React from 'react';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
@@ -23,6 +23,7 @@ const Layout = () => {
             boxSizing={'border-box'}
             padding={'10px'}
             height={'100%'}
+            data-testid={'router-outlet-cont'}
             overflow={'auto'}
           >
             <Outlet />

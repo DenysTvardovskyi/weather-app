@@ -20,6 +20,7 @@ const DaySelector = ({
       display={'flex'}
       flexDirection={matches ? 'row' : 'column'}
       justifyContent={'center'}
+      data-testid={'day-selector'}
       overflow={'auto'}
       width={'100%'}
       gap={'5px'}

@@ -7,6 +7,7 @@ const Footer = () => {
       <Box
         alignItems={'center'}
         padding={'20px 10px'}
+        data-testid={'footer'}
         height={'65px'}
         borderTop={'1px solid black'}
       >

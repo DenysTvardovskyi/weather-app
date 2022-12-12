@@ -15,7 +15,11 @@ const WeatherInfo = ({ data, name }: Props) => {
   const precipitation = (data?.pop * 100).toFixed(0);
 
   return (
-    <Box display={'grid'} gridTemplateColumns={'50% 50%'}>
+    <Box
+      display={'grid'}
+      data-testid={'weather-info'}
+      gridTemplateColumns={'50% 50%'}
+    >
       <Box display={'flex'} flexDirection={mobileL ? 'row' : 'column'}>
         <WeatherIconTemp weather={data?.weather} temp={data?.temp} />
         <Box>

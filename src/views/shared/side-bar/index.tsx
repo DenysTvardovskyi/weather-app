@@ -12,6 +12,7 @@ const SideBar = () => {
   return (
     <Box
       display={!matches ? 'flex' : 'inherit'}
+      data-testid={'side-bar'}
       maxWidth={matches ? '320px' : 'inherit'}
       width={'100%'}
       height={'100%'}

@@ -24,12 +24,11 @@ const mockResponse = {
   ],
 };
 
-const mockNetworkResponse = () => {
-  const mock = new MockAdapter(axios);
-  mock.onGet(url).reply(200, mockResponse);
-};
-
 describe('Search redux state tests', () => {
+  const mockNetworkResponse = () => {
+    const mock = new MockAdapter(axios);
+    mock.onGet(url).reply(200, mockResponse);
+  };
   beforeAll(() => {
     mockNetworkResponse();
   });

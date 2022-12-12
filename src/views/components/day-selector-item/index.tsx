@@ -48,6 +48,7 @@ const DaySelectorItem = ({
       border={'1px solid black'}
       display={matches ? 'block' : 'flex'}
       justifyContent={matches ? 'flex-start' : 'space-between'}
+      data-testid='day-selector-item'
       padding={'5px 10px'}
       className={
         classes.weekDay + ' ' + (index === activeIndex && classes.active)

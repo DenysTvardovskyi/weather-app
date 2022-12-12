@@ -19,8 +19,8 @@ export const fetchWeather = createAsyncThunk(
   async (coordinates: Coordinate) => {
     try {
       const response = await axios.get(
-        WEATHER_URL +
-          `forecast?lon=${coordinates[0]}&lat=${coordinates[1]}&units=metric&appid=${WEATHER_API_KEY}`,
+        'https://api.openweathermap.org/data/2.5/' +
+          `forecast?lon=${coordinates[0]}&lat=${coordinates[1]}&units=metric&appid=a8efff59c2b5c3436b8724b3620fe537`,
       );
       return response.data;
     } catch (err) {
@@ -35,6 +35,12 @@ export const citySlice = createSlice({
   reducers: {
     setCoordinates: (state, action) => {
       state.coordinates = action.payload;
+    },
+    setCity: (state, action) => {
+      state.city = action.payload;
+    },
+    setCityWeather: (state, action) => {
+      state.cityWeather = action.payload;
     },
   },
   extraReducers(builder) {
@@ -53,6 +59,6 @@ export const citySlice = createSlice({
   },
 });
 
-export const { setCoordinates } = citySlice.actions;
+export const { setCoordinates, setCity, setCityWeather } = citySlice.actions;
 
 export default citySlice.reducer;

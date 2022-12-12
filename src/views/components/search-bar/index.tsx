@@ -59,7 +59,7 @@ const SearchBar = () => {
     props: HTMLAttributes<HTMLElement>,
     option: IOption,
   ) => (
-    <li {...props}>
+    <li {...props} data-testid={'search-option'}>
       <SearchOption option={option} criteria={criteria} />
     </li>
   );
@@ -74,7 +74,8 @@ const SearchBar = () => {
     <Autocomplete
       disablePortal
       id='combo-box-demo'
-      options={options}
+      data-testid={'search-bar'}
+      options={options ?? []}
       value={value}
       onChange={handleCriteriaChange}
       onInputChange={handleInputChange}
